@@ -56,15 +56,15 @@ export default function SearchBar() {
       console.log("data: ", data);
       const { Search } = data;
       Search.forEach((movie) => {
-        movieList.push({ title: movie.Title, url: movie.Poster });
-        // console.log("movie here", movie);
-        // setSearchResults({ title: movie.Title, url: movie.Poster });
+        movieList.push({
+          title: movie.Title,
+          url: movie.Poster,
+          year: movie.Year,
+        });
       });
 
-      // console.log(Search[0].Poster, Search[0].Title);
       setSearchResults(movieList);
-      setShowButton(true);
-      // setSearchResults({ title: Search[0].Title, url: Search[0].Poster });
+      // setShowButton(true);
     });
   };
 
@@ -79,7 +79,6 @@ export default function SearchBar() {
           onKeyDown={(e) => {
             console.log(e.key);
             if (e.key === "Enter") {
-              console.log("Triggered: ", e.key);
               showResults(searchResults);
             }
           }}
@@ -90,10 +89,9 @@ export default function SearchBar() {
           }
         />
       </FormControl>
-      {showButton &&
-        searchResults &&
+      {searchResults &&
         searchResults.map((movie) => (
-          <MovieDetails Title={movie.title} img={movie.url} />
+          <MovieDetails Title={movie.title} img={movie.url} year={movie.year} />
         ))}
     </div>
   );
