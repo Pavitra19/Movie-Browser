@@ -4,7 +4,7 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import SearchIcon from "@material-ui/icons/Search";
-import MovieDetails from "./MovieDetails";
+import TabPanel from "./Tabs";
 
 export default function SearchBar() {
   const [movieName, setMovieName] = useState("");
@@ -92,15 +92,7 @@ export default function SearchBar() {
           }
         />
       </FormControl>
-      {searchResults &&
-        searchResults.map((movie) => (
-          <MovieDetails
-            Title={movie.title}
-            img={movie.url}
-            year={movie.year}
-            imdbID={movie.imdbID}
-          />
-        ))}
+      {searchResults && <TabPanel searchResults={searchResults} />}
     </div>
   );
 }
