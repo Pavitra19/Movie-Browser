@@ -10,6 +10,7 @@ export default function SearchBar() {
   const [movieName, setMovieName] = useState("");
   const [searchResults, setSearchResults] = useState();
   const [showButton, setShowButton] = useState(false);
+  let movieList = [];
 
   let URL = "http://www.omdbapi.com/?i=tt3896198&r=json&apikey=d66f3ecf&s=";
 
@@ -54,9 +55,16 @@ export default function SearchBar() {
       data = await data.json();
       console.log("data: ", data);
       const { Search } = data;
-      console.log(Search[0].Poster, Search[0].Title);
+      Search.forEach((movie) => {
+        movieList.push({ title: movie.Title, url: movie.Poster });
+        // console.log("movie here", movie);
+        // setSearchResults({ title: movie.Title, url: movie.Poster });
+      });
+
+      // console.log(Search[0].Poster, Search[0].Title);
+      setSearchResults(movieList);
       setShowButton(true);
-      setSearchResults({ title: Search[0].Title, url: Search[0].Poster });
+      // setSearchResults({ title: Search[0].Title, url: Search[0].Poster });
     });
   };
 
@@ -82,9 +90,11 @@ export default function SearchBar() {
           }
         />
       </FormControl>
-      {showButton && searchResults && (
-        <MovieDetails Title={searchResults.title} img={searchResults.url} />
-      )}
+      {showButton &&
+        searchResults &&
+        searchResults.map((movie) => (
+          <MovieDetails Title={movie.title} img={movie.url} />
+        ))}
     </div>
   );
 }
