@@ -42,7 +42,7 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
+    // backgroundColor: theme.palette.background.paper,
     display: "flex",
     height: 550,
     marginTop: "43px",
@@ -88,10 +88,12 @@ export default function VerticalTabs(props) {
       {props.searchResults.map((movie, index) => (
         <TabPanel value={value} index={index}>
           <MovieDetails
+            favs={props.favs}
             Title={movie.title}
             img={movie.url}
             year={movie.year}
             imdbID={movie.imdbID}
+            handleAddFav={props.handleAddFav}
           />
         </TabPanel>
       ))}

@@ -5,8 +5,10 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import SearchIcon from "@material-ui/icons/Search";
 import TabPanel from "./Tabs";
+import { FavoriteSharp } from "@material-ui/icons";
 
-export default function SearchBar() {
+export default function SearchBar(props) {
+  const { handleAddFav } = props;
   const [searchTerm, setSearchTerm] = useState();
   const [movieName, setMovieName] = useState();
   const [searchResults, setSearchResults] = useState();
@@ -42,7 +44,7 @@ export default function SearchBar() {
         setSearchResults(movieList);
         // setShowButton(true);
       })
-      .then((response) => console.log(response));
+      .then((response) => console.log("response", response));
   };
 
   return (
@@ -55,7 +57,7 @@ export default function SearchBar() {
           value={searchTerm}
           onKeyDown={(e) => {
             console.log(e.key);
-            if (e.key === "Enter") {
+            if (e.key === "Enter" && searchTerm.trim().length > 0) {
               showResults(searchResults);
             }
           }}
@@ -69,7 +71,11 @@ export default function SearchBar() {
       {searchResults && (
         <>
           <h1>Results for {movieName}</h1>
-          <TabPanel searchResults={searchResults} />
+          <TabPanel
+            favs={props.favs}
+            handleAddFav={handleAddFav}
+            searchResults={searchResults}
+          />
         </>
       )}
     </>
