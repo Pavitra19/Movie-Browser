@@ -13,7 +13,6 @@ function TabPanel(props) {
   return (
     <div
       role="tabpanel"
-      hidden={value !== index}
       id={`vertical-tabpanel-${index}`}
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
@@ -29,16 +28,24 @@ function TabPanel(props) {
 
 TabPanel.propTypes = {
   children: PropTypes.node,
-  index: PropTypes.any.isRequired,
+  //   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
 };
+
+function a11yProps(index) {
+  return {
+    id: `vertical-tab-${index}`,
+    "aria-controls": `vertical-tabpanel-${index}`,
+  };
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     display: "flex",
-    height: 400,
+    height: 550,
+    marginTop: "43px",
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.divider}`,
@@ -60,11 +67,22 @@ export default function VerticalTabs(props) {
         variant="scrollable"
         value={value}
         onChange={handleChange}
+        onKeyDown={(e) => {
+          if (value < props.searchResults.length - 1) {
+            if (e.key === "ArrowDown" && value >= 0) {
+              console.log("arrowdown", value);
+              setValue(value + 1);
+            } else if (e.key === "ArrowUp") {
+              console.log("arrowup", value);
+              setValue(value - 1);
+            }
+          }
+        }}
         aria-label="Vertical tabs example"
         className={classes.tabs}
       >
-        {props.searchResults.map((movie) => (
-          <Tab label={movie.title} />
+        {props.searchResults.map((movie, index) => (
+          <Tab label={movie.title} {...a11yProps(index)} />
         ))}
       </Tabs>
       {props.searchResults.map((movie, index) => (

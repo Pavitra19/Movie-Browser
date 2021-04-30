@@ -72,7 +72,7 @@ export default function SearchBar() {
   };
 
   return (
-    <div>
+    <>
       <FormControl>
         <InputLabel htmlFor="input-with-icon-adornment">Search</InputLabel>
         <Input
@@ -93,6 +93,6 @@ export default function SearchBar() {
         />
       </FormControl>
       {searchResults && <TabPanel searchResults={searchResults} />}
-    </div>
+    </>
   );
 }
