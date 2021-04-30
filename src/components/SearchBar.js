@@ -5,7 +5,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import SearchIcon from "@material-ui/icons/Search";
 import TabPanel from "./Tabs";
-import { FavoriteSharp } from "@material-ui/icons";
 
 export default function SearchBar(props) {
   const { handleAddFav } = props;
