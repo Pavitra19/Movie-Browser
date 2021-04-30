@@ -5,7 +5,7 @@ export default function NominateButton(props) {
   const [genre, setGenre] = useState();
   const [plot, setPlot] = useState();
 
-  const handleClick = () => {
+  const getDetails = () => {
     detailsURL += `${props.imdbID}`;
     fetch(detailsURL).then(async (details) => {
       details = await details.json();
@@ -15,11 +15,13 @@ export default function NominateButton(props) {
     });
   };
 
+  getDetails();
+
   return (
     <div>
-      <button onClick={handleClick}>Nominate</button>
       <h1>{genre}</h1>
       <p>{plot}</p>
+      <button onClick={props.handleClick}>Nominate</button>
     </div>
   );
 }
