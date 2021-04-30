@@ -7,7 +7,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import TabPanel from "./Tabs";
 
 export default function SearchBar() {
-  const [movieName, setMovieName] = useState("");
+  const [searchTerm, setSearchTerm] = useState();
+  const [movieName, setMovieName] = useState();
   const [searchResults, setSearchResults] = useState();
   const [showButton, setShowButton] = useState(false);
   let movieList = [];
@@ -15,40 +16,13 @@ export default function SearchBar() {
   let URL = "http://www.omdbapi.com/?r=json&apikey=d66f3ecf&s=";
 
   const handleChange = (event) => {
-    setMovieName(event.target.value);
-    // URL += `${movieName}`;
-
-    // fetch(URL).then((data) => {
-    // console.log("data: ", data.json());
-    //   console.log(data.json());
-    //   setSearchResults(data.json());
-    //   return data.json();
-    // return data;
-    // });
-    //   .then((result) => console.log("Result here: ", result))
-    //   .then((res) => console.log(res));
+    setSearchTerm(event.target.value);
   };
 
-  //   const handleSubmit = () => {
-  //     URL += `${movieName}`;
-
-  //     fetch(URL)
-  //       //   .then((data) => {
-  //       //     console.log("data: ", data.json());
-  //       //     setSearchResults(data);
-  //       //     // return data.json();
-  //       //     return data;
-  //       //   })
-  //       .then((data) => data.json())
-  //       .then((result) =>
-  //         console.log("Result here: ", showResults(result.Search))
-  //       )
-  //       .then((res) => console.log(res));
-  //   };
-
   const showResults = (result) => {
+    setMovieName(searchTerm);
     console.log("Rsults in fn: ", result);
-    URL += `${movieName}`;
+    URL += `${searchTerm}`;
     console.log("URL is: ", URL);
 
     fetch(URL)
@@ -78,7 +52,7 @@ export default function SearchBar() {
         <Input
           id="input-with-icon-adornment"
           onChange={handleChange}
-          value={movieName}
+          value={searchTerm}
           onKeyDown={(e) => {
             console.log(e.key);
             if (e.key === "Enter") {
@@ -92,7 +66,12 @@ export default function SearchBar() {
           }
         />
       </FormControl>
-      {searchResults && <TabPanel searchResults={searchResults} />}
+      {searchResults && (
+        <>
+          <h1>Results for {movieName}</h1>
+          <TabPanel searchResults={searchResults} />
+        </>
+      )}
     </>
   );
 }
