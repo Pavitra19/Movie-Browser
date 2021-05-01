@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import SearchBar from "./components/SearchBar";
+import Favourites from "./components/Favourites";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -88,7 +89,7 @@ export default function App() {
           </Tabs>
         </AppBar>
         <TabPanel value={value} index={0}>
-          Your Favourite Movies
+          <Favourites deviceType="desktop" />
         </TabPanel>
         <TabPanel value={value} index={1}>
           <SearchBar handleAddFav={handleAddFav} favs={favs} />

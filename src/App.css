@@ -16,7 +16,7 @@ body,
 
 .App {
   text-align: center;
-  background-color: #282c34;
+  background-color: black;
   color: white;
 }
 
@@ -28,6 +28,10 @@ body,
 .movie-title {
   color: #f50057;
   font-size: 35px;
+}
+
+.fav-carousel {
+  margin-top: 10%;
 }
 
 @media (prefers-reduced-motion: no-preference) {

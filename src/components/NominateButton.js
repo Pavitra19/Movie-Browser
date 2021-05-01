@@ -39,9 +39,10 @@ const StyledTableCell = withStyles((theme) => ({
 
 const StyledTableRow = withStyles((theme) => ({
   root: {
-    backgroundColor: "pink",
     "&:nth-of-type(odd)": {
-      backgroundColor: "grey",
+      // backgroundColor: "#393e46",
+      // backgroundColor: "#222831",
+      backgroundColor: "#191919",
     },
   },
 }))(TableRow);
@@ -75,8 +76,6 @@ export default function NominateButton(props) {
         Awards: details.Awards,
         imdbRating: details.imdbRating,
       }));
-      // setGenre(details.Genre);
-      // setPlot(details.Plot);
     });
   };
 

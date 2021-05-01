@@ -48,9 +48,15 @@ export default function SearchBar(props) {
 
   return (
     <>
-      <FormControl>
-        <InputLabel htmlFor="input-with-icon-adornment">Search</InputLabel>
+      <FormControl style={{ color: "white" }}>
+        <InputLabel
+          style={{ color: "white" }}
+          htmlFor="input-with-icon-adornment"
+        >
+          Search
+        </InputLabel>
         <Input
+          style={{ color: "white" }}
           id="input-with-icon-adornment"
           onChange={handleChange}
           value={searchTerm}
@@ -62,7 +68,7 @@ export default function SearchBar(props) {
           }}
           startAdornment={
             <InputAdornment position="start">
-              <SearchIcon />
+              <SearchIcon style={{ color: "white" }} />
             </InputAdornment>
           }
         />
