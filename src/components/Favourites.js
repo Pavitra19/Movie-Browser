@@ -55,12 +55,11 @@ export default function Favourites(props) {
         responsive={responsive}
         ssr={true} // means to render carousel on server-side.
         infinite={true}
-        autoPlay={deviceType !== "mobile" ? true : false}
-        // autoPlay={false}
+        autoPlay={deviceType !== "mobile" && numFavs > 3 ? true : false}
         autoPlaySpeed={1000}
         keyBoardControl={true}
-        customTransition="all 5"
-        transitionDuration={5000}
+        customTransition="all 4"
+        transitionDuration={4000}
         containerClass="carousel-container"
         removeArrowOnDeviceType={["tablet", "mobile"]}
         deviceType={deviceType}
