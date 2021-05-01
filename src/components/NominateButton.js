@@ -30,14 +30,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const StyledTableCell = withStyles((theme) => ({
+const StyledTableCell = withStyles(() => ({
   body: {
     fontSize: 14,
     color: "white",
   },
 }))(TableCell);
 
-const StyledTableRow = withStyles((theme) => ({
+const StyledTableRow = withStyles(() => ({
   root: {
     "&:nth-of-type(odd)": {
       // backgroundColor: "#393e46",
@@ -48,10 +48,10 @@ const StyledTableRow = withStyles((theme) => ({
 }))(TableRow);
 
 export default function NominateButton(props) {
+  const { favs, imdbID } = props;
+
   let detailsURL = `http://www.omdbapi.com/?apikey=d66f3ecf&i=`;
   const [movieDetails, setMovieDetails] = useState({});
-  const [genre, setGenre] = useState();
-  const [plot, setPlot] = useState();
   const [open, setOpen] = useState(false);
   const classes = useStyles();
 
@@ -64,7 +64,7 @@ export default function NominateButton(props) {
   };
 
   const getDetails = () => {
-    detailsURL += `${props.imdbID}`;
+    detailsURL += `${imdbID}`;
     fetch(detailsURL).then(async (details) => {
       details = await details.json();
       // console.log("details: ", details);
@@ -80,6 +80,10 @@ export default function NominateButton(props) {
   };
 
   getDetails();
+
+  const checkNominated = () => {
+    return favs.some((movie) => movie.imdbID === imdbID);
+  };
 
   function createData(genre, plot, actors, awards) {
     return { genre, plot, actors, awards };
@@ -113,10 +117,8 @@ export default function NominateButton(props) {
           </TableBody>
         </Table>
       </TableContainer>
-      {/* <h1>Genre: {genre}</h1>
-      <p> Plot: {plot}</p> */}
       <div className={classes.root}>
-        {props.favs.length === 2 && (
+        {favs.length === 2 && (
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} variant="filled" severity="warning">
               You've reached your max of 5 favourites!
@@ -133,7 +135,7 @@ export default function NominateButton(props) {
           props.handleClick();
           handleClick();
         }}
-        disabled={props.favs.length >= 5}
+        disabled={checkNominated() || favs.length >= 5}
       >
         Favourite
       </Button>

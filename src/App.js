@@ -64,27 +64,12 @@ export default function App() {
   };
 
   useEffect(() => console.log("Favs: ", favs), [favs]);
-  // const handleAddFav = (movieDetails) => {
-  //   const { props } = movieDetails;
-  //   console.log("Clicked");
-  //   setFavs((prevProps) => {
-  //     return [...prevProps, props];
-  //   });
-  //   console.log("movieDeets", props);
-  // };
 
   const handleAddFav = (movieDetails) => {
     console.log("handle fav", movieDetails);
     setFavs((prevProps) => {
       return [...prevProps, movieDetails];
     });
-    // setFavs(
-    //   movieDetails.map((movie) => {
-    //     return (
-    //       <MoviePreview Title={movie.Title} img={movie.img} alt={movie.Title} />
-    //     );
-    //   })
-    // );
   };
 
   return (

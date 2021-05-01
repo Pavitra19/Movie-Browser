@@ -3,7 +3,6 @@ import MoviePreview from "./MoviePreview";
 import NominateButton from "./NominateButton";
 
 export default function MovieDetails(props) {
-  let content = [];
   return (
     <div>
       <MoviePreview Title={props.Title} img={props.img} alt={props.Title} />
@@ -12,23 +11,12 @@ export default function MovieDetails(props) {
         favs={props.favs}
         imdbID={props.imdbID}
         handleClick={() => {
-          // content.push({
-          //   Title: props.Title,
-          //   img: props.img,
-          //   alt: props.Title,
-          // });
           props.handleAddFav({
             Title: props.Title,
             img: props.img,
             alt: props.Title,
+            imdbID: props.imdbID,
           });
-          // { Title: props.Title, img: props.img, alt: props.Title }
-          // <MoviePreview
-          //   //   Title={props.Title}
-          //   //   img={props.img}
-          //   //   alt={props.Title}
-          //   {...props}
-          // />
         }}
       />
     </div>
