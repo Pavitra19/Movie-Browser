@@ -4,11 +4,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableRow from "@material-ui/core/TableRow";
+import MovieTable from "./MovieTable";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -30,23 +26,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
-const StyledTableCell = withStyles(() => ({
-  body: {
-    fontSize: 14,
-    color: "white",
-  },
-}))(TableCell);
-
-const StyledTableRow = withStyles(() => ({
-  root: {
-    "&:nth-of-type(odd)": {
-      // backgroundColor: "#393e46",
-      // backgroundColor: "#222831",
-      backgroundColor: "#191919",
-    },
-  },
-}))(TableRow);
 
 export default function NominateButton(props) {
   const { favs, imdbID } = props;
@@ -87,39 +66,9 @@ export default function NominateButton(props) {
     return favs.some((movie) => movie.imdbID === imdbID);
   };
 
-  function createData(Genre, Plot, Runtime, Actors, Awards, imdbRating) {
-    return { Genre, Plot, Runtime, Actors, Awards, imdbRating };
-  }
-
-  // Object.keys(movieDetails);
-
-  const rows = [
-    createData("GENRE", movieDetails.Genre),
-    createData("PLOT", movieDetails.Plot),
-    createData("RUNTIME", movieDetails.RunTime),
-    createData("ACTORS", movieDetails.Actors),
-    createData("AWARDS", movieDetails.Awards),
-    createData("IMDB RATING", movieDetails.imdbRating),
-  ];
-
   return (
     <div>
-      <TableContainer>
-        <Table className={classes.table} aria-label="simple table">
-          <TableBody>
-            {rows.map((row) => (
-              <StyledTableRow key={row.name}>
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                {Object.keys(movieDetails).map((info) => (
-                  <StyledTableCell align="center">{row[info]}</StyledTableCell>
-                ))}
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <MovieTable movieDetails={movieDetails} />
       <div className={classes.root}>
         {favs.length === 2 && (
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
