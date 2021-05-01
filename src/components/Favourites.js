@@ -46,7 +46,7 @@ export default function Favourites(props) {
 
   return (
     <div>
-      <h1> Your Favourites all in one place.</h1>
+      <h1> Your favourites all in one place.</h1>
 
       <Carousel
         swipeable={false}

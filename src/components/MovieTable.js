@@ -10,6 +10,7 @@ const StyledTableCell = withStyles(() => ({
   body: {
     fontSize: 14,
     color: "white",
+    borderBottom: "none",
   },
 }))(TableCell);
 
@@ -25,13 +26,13 @@ const StyledTableRow = withStyles(() => ({
 
 // const useStyles = makeStyles({
 //   table: {
-//     minWidth: 700,
+//     // minWidth: 700,
 //   },
 // });
 
 export default function MovieTable(props) {
   const { movieDetails } = props;
-  //   const classes = useStyles();
+  // const classes = useStyles();
 
   function createData(Genre, Plot, Runtime, Actors, Awards, imdbRating) {
     return { Genre, Plot, Runtime, Actors, Awards, imdbRating };
@@ -39,11 +40,11 @@ export default function MovieTable(props) {
 
   const rows = [
     createData("GENRE", movieDetails.Genre),
-    createData("PLOT", movieDetails.Plot),
     createData("RUNTIME", movieDetails.RunTime),
     createData("ACTORS", movieDetails.Actors),
-    createData("AWARDS", movieDetails.Awards),
     createData("IMDB RATING", movieDetails.imdbRating),
+    createData("AWARDS", movieDetails.Awards),
+    createData("PLOT", movieDetails.Plot),
   ];
 
   return (
@@ -52,7 +53,11 @@ export default function MovieTable(props) {
         <TableBody>
           {rows.map((row) => (
             <StyledTableRow key={row.name}>
-              <TableCell component="th" scope="row">
+              <TableCell
+                component="th"
+                scope="row"
+                style={{ borderBottom: "none" }}
+              >
                 {row.name}
               </TableCell>
               {Object.keys(movieDetails).map((info) => (
