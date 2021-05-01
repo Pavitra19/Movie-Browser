@@ -14,7 +14,7 @@ export default function SearchBar(props) {
   const [showButton, setShowButton] = useState(false);
   let movieList = [];
 
-  let URL = "http://www.omdbapi.com/?r=json&apikey=d66f3ecf&s=";
+  let URL = "https://www.omdbapi.com/?r=json&apikey=d66f3ecf&s=";
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -29,7 +29,7 @@ export default function SearchBar(props) {
     fetch(URL)
       .then(async (data) => {
         data = await data.json();
-        // console.log("data: ", data);
+        console.log("data: ", data);
         const { Search } = data;
         Search.forEach((movie) => {
           movieList.push({

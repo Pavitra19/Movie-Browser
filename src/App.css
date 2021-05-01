@@ -26,7 +26,8 @@ body,
 } */
 
 .movie-title {
-  color: #f50057;
+  /* color: #f50057; */
+  font-weight: bold;
   font-size: 35px;
 }
 

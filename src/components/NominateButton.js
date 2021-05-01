@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: theme.spacing(1),
+    marginTop: "30px",
     "&.Mui-disabled": {
       color: "ghostwhite",
       backgroundColor: "darkgrey",
@@ -50,7 +51,7 @@ const StyledTableRow = withStyles(() => ({
 export default function NominateButton(props) {
   const { favs, imdbID } = props;
 
-  let detailsURL = `http://www.omdbapi.com/?apikey=d66f3ecf&i=`;
+  let detailsURL = `https://www.omdbapi.com/?apikey=d66f3ecf&i=`;
   const [movieDetails, setMovieDetails] = useState({});
   const [open, setOpen] = useState(false);
   const classes = useStyles();
@@ -72,6 +73,7 @@ export default function NominateButton(props) {
         ...prevValues,
         Genre: details.Genre,
         Plot: details.Plot,
+        RunTime: details.Runtime,
         Actors: details.Actors,
         Awards: details.Awards,
         imdbRating: details.imdbRating,
@@ -85,17 +87,19 @@ export default function NominateButton(props) {
     return favs.some((movie) => movie.imdbID === imdbID);
   };
 
-  function createData(genre, plot, actors, awards) {
-    return { genre, plot, actors, awards };
+  function createData(Genre, Plot, Runtime, Actors, Awards, imdbRating) {
+    return { Genre, Plot, Runtime, Actors, Awards, imdbRating };
   }
 
   // Object.keys(movieDetails);
 
   const rows = [
-    createData("Genre", movieDetails.Genre),
-    createData("Plot", movieDetails.Plot),
-    createData("Actors", movieDetails.Actors),
-    createData("Awards", movieDetails.Awards),
+    createData("GENRE", movieDetails.Genre),
+    createData("PLOT", movieDetails.Plot),
+    createData("RUNTIME", movieDetails.RunTime),
+    createData("ACTORS", movieDetails.Actors),
+    createData("AWARDS", movieDetails.Awards),
+    createData("IMDB RATING", movieDetails.imdbRating),
   ];
 
   return (
@@ -108,10 +112,9 @@ export default function NominateButton(props) {
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
-                <StyledTableCell align="center">{row.genre}</StyledTableCell>
-                <StyledTableCell align="center">{row.plot}</StyledTableCell>
-                <StyledTableCell align="center">{row.actors}</StyledTableCell>
-                <StyledTableCell align="center">{row.awards}</StyledTableCell>
+                {Object.keys(movieDetails).map((info) => (
+                  <StyledTableCell align="center">{row[info]}</StyledTableCell>
+                ))}
               </StyledTableRow>
             ))}
           </TableBody>
@@ -135,7 +138,7 @@ export default function NominateButton(props) {
           props.handleClick();
           handleClick();
         }}
-        disabled={checkNominated() || favs.length >= 5}
+        disabled={checkNominated() || favs.length >= 6}
       >
         Favourite
       </Button>
