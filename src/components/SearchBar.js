@@ -22,14 +22,14 @@ export default function SearchBar(props) {
 
   const showResults = (result) => {
     setMovieName(searchTerm);
-    console.log("Rsults in fn: ", result);
+    // console.log("Rsults in fn: ", result);
     URL += `${searchTerm}`;
-    console.log("URL is: ", URL);
+    // console.log("URL is: ", URL);
 
     fetch(URL)
       .then(async (data) => {
         data = await data.json();
-        console.log("data: ", data);
+        // console.log("data: ", data);
         const { Search } = data;
         Search.forEach((movie) => {
           movieList.push({
@@ -39,7 +39,7 @@ export default function SearchBar(props) {
             imdbID: movie.imdbID,
           });
         });
-        console.log("movielist: ", movieList);
+        // console.log("movielist: ", movieList);
         setSearchResults(movieList);
         // setShowButton(true);
       })
@@ -61,7 +61,7 @@ export default function SearchBar(props) {
           onChange={handleChange}
           value={searchTerm}
           onKeyDown={(e) => {
-            console.log(e.key);
+            // console.log(e.key);
             if (e.key === "Enter" && searchTerm.trim().length > 0) {
               showResults(searchResults);
             }

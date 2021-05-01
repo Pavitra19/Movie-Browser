@@ -1,9 +1,12 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import MovieIcon from "@material-ui/icons/Movie";
 
 export default function Favourites(props) {
-  const { deviceType } = props;
+  const { deviceType, favs } = props;
+  const numFavs = favs.length;
+  let placeholderCards = [];
 
   const responsive = {
     desktop: {
@@ -22,6 +25,25 @@ export default function Favourites(props) {
       slidesToSlide: 1, // optional, default to 1.
     },
   };
+
+  if (numFavs < 3) {
+    let numPlaceholders = 3 - numFavs;
+    for (let i = 0; i <= numPlaceholders; i++) {
+      placeholderCards.push(
+        <div>
+          {/* <div className="placeholder-cards"> */}
+          {/* <img
+            src="https://image.pngaaa.com/545/88545-middle.png"
+            alt="pick a movie"
+            style={{ backgroundColor: "black" }}
+          /> */}
+          <MovieIcon className="placeholder-icon" />
+          <h4> Pick a favourite for it to show up here</h4>
+        </div>
+      );
+    }
+  }
+
   return (
     <div>
       <h1> Your Favourites all in one place.</h1>
@@ -34,6 +56,7 @@ export default function Favourites(props) {
         ssr={true} // means to render carousel on server-side.
         infinite={true}
         autoPlay={deviceType !== "mobile" ? true : false}
+        // autoPlay={false}
         autoPlaySpeed={1000}
         keyBoardControl={true}
         customTransition="all 5"
@@ -45,7 +68,16 @@ export default function Favourites(props) {
         itemClass="carousel-item-padding-40-px"
         className="fav-carousel"
       >
-        <div>
+        {favs.map((movie) => {
+          return (
+            <div>
+              <img src={movie.img} alt={movie.Title} />
+              <h4>{movie.Title}</h4>
+            </div>
+          );
+        })}
+        {placeholderCards}
+        {/* <div>
           <img
             src="https://upload.wikimedia.org/wikipedia/en/1/15/Yeh_jawani_hai_deewani.jpg"
             alt="movie1"
@@ -62,10 +94,7 @@ export default function Favourites(props) {
             src="https://m.media-amazon.com/images/M/MV5BZjAzZjZiMmQtMDZmOC00NjVmLTkyNTItOGI2Mzg4NTBhZTA1XkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_.jpg"
             alt="movie3"
           />
-        </div>
-        <div>Item 4</div>
-        <div>Item 5</div>
-        <div>Item 6</div>
+        </div>*/}
       </Carousel>
     </div>
   );

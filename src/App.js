@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import SearchBar from "./components/SearchBar";
 import Favourites from "./components/Favourites";
+import MoviePreview from "./components/MoviePreview";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -62,13 +63,28 @@ export default function App() {
     setValue(newValue);
   };
 
+  useEffect(() => console.log("Favs: ", favs), [favs]);
+  // const handleAddFav = (movieDetails) => {
+  //   const { props } = movieDetails;
+  //   console.log("Clicked");
+  //   setFavs((prevProps) => {
+  //     return [...prevProps, props];
+  //   });
+  //   console.log("movieDeets", props);
+  // };
+
   const handleAddFav = (movieDetails) => {
-    const { props } = movieDetails;
-    console.log("Clicked");
+    console.log("handle fav", movieDetails);
     setFavs((prevProps) => {
-      return [...prevProps, props];
+      return [...prevProps, movieDetails];
     });
-    console.log("movieDeets", props);
+    // setFavs(
+    //   movieDetails.map((movie) => {
+    //     return (
+    //       <MoviePreview Title={movie.Title} img={movie.img} alt={movie.Title} />
+    //     );
+    //   })
+    // );
   };
 
   return (
@@ -89,7 +105,7 @@ export default function App() {
           </Tabs>
         </AppBar>
         <TabPanel value={value} index={0}>
-          <Favourites deviceType="desktop" />
+          <Favourites deviceType="desktop" favs={favs} />
         </TabPanel>
         <TabPanel value={value} index={1}>
           <SearchBar handleAddFav={handleAddFav} favs={favs} />

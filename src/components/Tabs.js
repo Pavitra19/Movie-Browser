@@ -70,10 +70,10 @@ export default function VerticalTabs(props) {
         onKeyDown={(e) => {
           if (value < props.searchResults.length - 1) {
             if (e.key === "ArrowDown" && value >= 0) {
-              console.log("arrowdown", value);
+              // console.log("arrowdown", value);
               setValue(value + 1);
             } else if (e.key === "ArrowUp") {
-              console.log("arrowup", value);
+              // console.log("arrowup", value);
               setValue(value - 1);
             }
           }
