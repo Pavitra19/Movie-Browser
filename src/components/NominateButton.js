@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -28,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NominateButton(props) {
-  const { favs, imdbID } = props;
+  const { favs, imdbID, removeFav } = props;
 
   let detailsURL = `https://www.omdbapi.com/?apikey=d66f3ecf&i=`;
   const [movieDetails, setMovieDetails] = useState({});
@@ -91,6 +92,17 @@ export default function NominateButton(props) {
       >
         Favourite
       </Button>
+      {checkNominated() && (
+        <Button
+          variant="contained"
+          color="secondary"
+          className={classes.button}
+          endIcon={<HighlightOffIcon />}
+          onClick={removeFav}
+        >
+          Remove Favourite
+        </Button>
+      )}
     </div>
   );
 }
