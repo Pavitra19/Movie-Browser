@@ -53,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function VerticalTabs(props) {
+  const { removeFav } = props;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -94,6 +95,7 @@ export default function VerticalTabs(props) {
             year={movie.year}
             imdbID={movie.imdbID}
             handleAddFav={props.handleAddFav}
+            removeFav={removeFav}
           />
         </TabPanel>
       ))}

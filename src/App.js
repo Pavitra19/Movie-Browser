@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import SearchBar from "./components/SearchBar";
 import Favourites from "./components/Favourites";
-import MoviePreview from "./components/MoviePreview";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -12,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import HomeIcon from "@material-ui/icons/Home";
 import SearchIcon from "@material-ui/icons/Search";
+// import NavBar from "./components/NavBar";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -72,6 +72,11 @@ export default function App() {
     });
   };
 
+  const removeFav = (movieDetails) => {
+    console.log("remove fav ", movieDetails);
+    setFavs(favs.filter(({ Title }) => Title !== movieDetails.Title));
+  };
+
   return (
     <div className="App">
       <div className={classes.root}>
@@ -90,12 +95,17 @@ export default function App() {
           </Tabs>
         </AppBar>
         <TabPanel value={value} index={0}>
-          <Favourites deviceType="desktop" favs={favs} />
+          <Favourites deviceType="desktop" favs={favs} removeFav={removeFav} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <SearchBar handleAddFav={handleAddFav} favs={favs} />
+          <SearchBar
+            handleAddFav={handleAddFav}
+            removeFav={removeFav}
+            favs={favs}
+          />
         </TabPanel>
       </div>
+      {/* <NavBar handleAddFav={handleAddFav} favs={favs} /> */}
     </div>
   );
 }

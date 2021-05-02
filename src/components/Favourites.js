@@ -6,7 +6,7 @@ import MovieIcon from "@material-ui/icons/Movie";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 
 export default function Favourites(props) {
-  const { deviceType, favs } = props;
+  const { deviceType, favs, removeFav } = props;
   const numFavs = favs.length;
   let placeholderCards = [];
 
@@ -76,6 +76,7 @@ export default function Favourites(props) {
                   top: "-21px",
                   zIndex: 1,
                 }}
+                onClick={() => removeFav(movie)}
               >
                 <RemoveCircleIcon title="Remove" label="Remove" />
               </IconButton>

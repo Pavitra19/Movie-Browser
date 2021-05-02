@@ -7,7 +7,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import TabPanel from "./Tabs";
 
 export default function SearchBar(props) {
-  const { handleAddFav } = props;
+  const { handleAddFav, removeFav } = props;
   const [searchTerm, setSearchTerm] = useState();
   const [movieName, setMovieName] = useState();
   const [searchResults, setSearchResults] = useState();
@@ -79,6 +79,7 @@ export default function SearchBar(props) {
           <TabPanel
             favs={props.favs}
             handleAddFav={handleAddFav}
+            removeFav={removeFav}
             searchResults={searchResults}
           />
         </>
