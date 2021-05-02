@@ -1,7 +1,9 @@
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import IconButton from "@material-ui/core/IconButton";
 import MovieIcon from "@material-ui/icons/Movie";
+import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 
 export default function Favourites(props) {
   const { deviceType, favs } = props;
@@ -32,11 +34,6 @@ export default function Favourites(props) {
       placeholderCards.push(
         <div>
           {/* <div className="placeholder-cards"> */}
-          {/* <img
-            src="https://image.pngaaa.com/545/88545-middle.png"
-            alt="pick a movie"
-            style={{ backgroundColor: "black" }}
-          /> */}
           <MovieIcon className="placeholder-icon" />
           <h4> Pick a favourite for it to show up here</h4>
         </div>
@@ -70,7 +67,24 @@ export default function Favourites(props) {
         {favs.map((movie) => {
           return (
             <div>
-              <img src={movie.img} alt={movie.Title} />
+              <IconButton
+                title="Remove"
+                style={{
+                  color: "crimson",
+                  position: "absolute",
+                  right: "110px",
+                  top: "-21px",
+                  zIndex: 1,
+                }}
+              >
+                <RemoveCircleIcon title="Remove" label="Remove" />
+              </IconButton>
+
+              <img
+                src={movie.img}
+                alt={movie.Title}
+                style={{ position: "relative" }}
+              />
               <h4>{movie.Title}</h4>
             </div>
           );

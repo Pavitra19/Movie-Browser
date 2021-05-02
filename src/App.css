@@ -32,6 +32,9 @@ body,
 }
 
 /** Carousel **/
+ul.react-multi-carousel-track {
+  margin-top: 15px;
+}
 
 .fav-carousel {
   margin-top: 10%;
