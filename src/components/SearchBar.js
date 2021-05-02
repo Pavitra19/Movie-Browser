@@ -16,7 +16,10 @@ export default function SearchBar(props) {
 
   let URL = "https://www.omdbapi.com/?r=json&apikey=d66f3ecf&s=";
 
-  useEffect(() => console.log("error ", error), [error]);
+  useEffect(
+    () => console.log("error ", error, "searchResults: ", searchResults),
+    [error, searchResults]
+  );
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -49,6 +52,7 @@ export default function SearchBar(props) {
         } else {
           const { Error } = data;
           setError(Error);
+          setSearchResults([]);
         }
       })
       .then((response) => console.log("response", response));
@@ -81,7 +85,7 @@ export default function SearchBar(props) {
           }
         />
       </FormControl>
-      {searchResults && searchResults.length > 0 ? (
+      {searchResults && searchResults.length ? (
         <>
           <h1>Results for {movieName}</h1>
           <TabPanel
