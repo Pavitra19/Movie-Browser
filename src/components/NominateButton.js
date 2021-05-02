@@ -44,6 +44,8 @@ export default function NominateButton(props) {
     setOpen(true);
   };
 
+  useEffect(() => getDetails(), []);
+
   const getDetails = () => {
     detailsURL += `${imdbID}`;
     fetch(detailsURL).then(async (details) => {
@@ -61,7 +63,7 @@ export default function NominateButton(props) {
     });
   };
 
-  getDetails();
+  // getDetails();
 
   const checkNominated = () => {
     return favs.some((movie) => movie.imdbID === imdbID);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -11,10 +11,12 @@ export default function SearchBar(props) {
   const [searchTerm, setSearchTerm] = useState();
   const [movieName, setMovieName] = useState();
   const [searchResults, setSearchResults] = useState();
-  const [showButton, setShowButton] = useState(false);
+  const [error, setError] = useState();
   let movieList = [];
 
   let URL = "https://www.omdbapi.com/?r=json&apikey=d66f3ecf&s=";
+
+  useEffect(() => console.log("error ", error), [error]);
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -30,18 +32,24 @@ export default function SearchBar(props) {
       .then(async (data) => {
         data = await data.json();
         console.log("data: ", data);
-        const { Search } = data;
-        Search.forEach((movie) => {
-          movieList.push({
-            title: movie.Title,
-            url: movie.Poster,
-            year: movie.Year,
-            imdbID: movie.imdbID,
+        const { Response } = data;
+        if (Response === "True") {
+          const { Search } = data;
+          Search.forEach((movie) => {
+            movieList.push({
+              title: movie.Title,
+              url: movie.Poster,
+              year: movie.Year,
+              imdbID: movie.imdbID,
+            });
           });
-        });
-        // console.log("movielist: ", movieList);
-        setSearchResults(movieList);
-        // setShowButton(true);
+          // console.log("movielist: ", movieList);
+          setSearchResults(movieList);
+          // setShowButton(true);
+        } else {
+          const { Error } = data;
+          setError(Error);
+        }
       })
       .then((response) => console.log("response", response));
   };
@@ -73,7 +81,7 @@ export default function SearchBar(props) {
           }
         />
       </FormControl>
-      {searchResults && (
+      {searchResults && searchResults.length > 0 ? (
         <>
           <h1>Results for {movieName}</h1>
           <TabPanel
@@ -83,6 +91,8 @@ export default function SearchBar(props) {
             searchResults={searchResults}
           />
         </>
+      ) : (
+        <div>{error}</div>
       )}
     </>
   );
