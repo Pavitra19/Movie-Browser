@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function VerticalTabs(props) {
-  const { removeFav } = props;
+  const { removeFav, searchResults, handleAddFav, favs } = props;
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -82,19 +82,19 @@ export default function VerticalTabs(props) {
         aria-label="Vertical tabs example"
         className={classes.tabs}
       >
-        {props.searchResults.map((movie, index) => (
+        {searchResults.map((movie, index) => (
           <Tab label={movie.title} {...a11yProps(index)} />
         ))}
       </Tabs>
-      {props.searchResults.map((movie, index) => (
+      {searchResults.map((movie, index) => (
         <TabPanel value={value} index={index}>
           <MovieDetails
-            favs={props.favs}
+            favs={favs}
             Title={movie.title}
             img={movie.url}
             year={movie.year}
             imdbID={movie.imdbID}
-            handleAddFav={props.handleAddFav}
+            handleAddFav={handleAddFav}
             removeFav={removeFav}
           />
         </TabPanel>
