@@ -58,6 +58,22 @@ ul.react-multi-carousel-track {
   width: 6rem;
 }
 
+/** Error **/
+.error-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 37%;
+  top: 41%;
+}
+
+.MuiSvgIcon-root.error-icon {
+  height: 9rem;
+  width: 5rem;
+  margin-right: 20px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
