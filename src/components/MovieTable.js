@@ -26,7 +26,7 @@ const StyledTableRow = withStyles(() => ({
 
 // const useStyles = makeStyles({
 //   table: {
-//     // minWidth: 700,
+//     minWidth: "888px",
 //   },
 // });
 
@@ -49,7 +49,7 @@ export default function MovieTable(props) {
 
   return (
     <TableContainer>
-      <Table aria-label="simple table">
+      <Table aria-label="simple table" style={{ minWidth: "862px" }}>
         <TableBody>
           {rows.map((row) => (
             <StyledTableRow key={row.name}>

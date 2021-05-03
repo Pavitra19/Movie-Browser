@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import MovieTable from "./MovieTable";
+import Loading from "./Loading";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -34,6 +35,7 @@ export default function NominateButton(props) {
   let detailsURL = `https://www.omdbapi.com/?apikey=d66f3ecf&i=`;
   const [movieDetails, setMovieDetails] = useState({});
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const classes = useStyles();
 
   const handleClose = () => {
@@ -47,6 +49,7 @@ export default function NominateButton(props) {
   useEffect(() => getDetails(), []);
 
   const getDetails = () => {
+    setLoading(true);
     detailsURL += `${imdbID}`;
     fetch(detailsURL).then(async (details) => {
       details = await details.json();
@@ -61,6 +64,7 @@ export default function NominateButton(props) {
         imdbRating: details.imdbRating,
       }));
     });
+    setLoading(false);
   };
 
   // getDetails();
@@ -69,7 +73,9 @@ export default function NominateButton(props) {
     return favs.some((movie) => movie.imdbID === imdbID);
   };
 
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <div>
       <MovieTable movieDetails={movieDetails} />
       <div className={classes.root}>
