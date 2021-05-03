@@ -77,7 +77,7 @@ export default function NominateButton(props) {
     <Loading />
   ) : (
     <div>
-      <MovieTable movieDetails={movieDetails} />
+      <MovieTable movieDetails={movieDetails} imdbID={imdbID} />
       <div className={classes.root}>
         {favs.length === 2 && (
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>

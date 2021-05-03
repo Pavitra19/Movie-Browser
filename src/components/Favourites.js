@@ -32,8 +32,7 @@ export default function Favourites(props) {
     let numPlaceholders = 3 - numFavs;
     for (let i = 0; i <= numPlaceholders; i++) {
       placeholderCards.push(
-        <div>
-          {/* <div className="placeholder-cards"> */}
+        <div key={i}>
           <MovieIcon className="placeholder-icon" />
           <h4> Pick a favourite for it to show up here</h4>
         </div>
@@ -66,7 +65,7 @@ export default function Favourites(props) {
       >
         {favs.map((movie) => {
           return (
-            <div>
+            <div key={movie.imdbID}>
               <IconButton
                 title="Remove"
                 style={{

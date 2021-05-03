@@ -78,11 +78,11 @@ export default function VerticalTabs(props) {
         className={classes.tabs}
       >
         {searchResults.map((movie, index) => (
-          <Tab label={movie.title} {...a11yProps(index)} />
+          <Tab key={index} label={movie.title} {...a11yProps(index)} />
         ))}
       </Tabs>
       {searchResults.map((movie, index) => (
-        <TabPanel value={value} index={index}>
+        <TabPanel value={value} index={index} key={`${index} ${movie.imdbID}`}>
           <MovieDetails
             favs={favs}
             Title={movie.title}

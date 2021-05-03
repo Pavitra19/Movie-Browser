@@ -10,7 +10,7 @@ import Loading from "./Loading";
 
 export default function SearchBar(props) {
   const { handleAddFav, removeFav } = props;
-  const [searchTerm, setSearchTerm] = useState();
+  const [searchTerm, setSearchTerm] = useState("");
   const [movieName, setMovieName] = useState();
   const [searchResults, setSearchResults] = useState();
   const [error, setError] = useState();

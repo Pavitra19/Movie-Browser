@@ -31,7 +31,7 @@ const StyledTableRow = withStyles(() => ({
 // });
 
 export default function MovieTable(props) {
-  const { movieDetails } = props;
+  const { movieDetails, imdbID } = props;
   // const classes = useStyles();
 
   function createData(Genre, Plot, Runtime, Actors, Awards, imdbRating) {
@@ -51,8 +51,8 @@ export default function MovieTable(props) {
     <TableContainer>
       <Table aria-label="simple table" style={{ minWidth: "862px" }}>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          {rows.map((row, index) => (
+            <StyledTableRow key={`${row.name} ${index}`}>
               <TableCell
                 component="th"
                 scope="row"
@@ -60,8 +60,10 @@ export default function MovieTable(props) {
               >
                 {row.name}
               </TableCell>
-              {Object.keys(movieDetails).map((info) => (
-                <StyledTableCell align="center">{row[info]}</StyledTableCell>
+              {Object.keys(movieDetails).map((info, index) => (
+                <StyledTableCell key={index} align="center">
+                  {row[info]}
+                </StyledTableCell>
               ))}
             </StyledTableRow>
           ))}
