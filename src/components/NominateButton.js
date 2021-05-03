@@ -91,7 +91,7 @@ export default function NominateButton(props) {
         variant="contained"
         color="secondary"
         className={classes.button}
-        endIcon={<FavoriteIcon />}
+        startIcon={<FavoriteIcon />}
         onClick={() => {
           props.handleClick();
           handleClick();
@@ -105,7 +105,7 @@ export default function NominateButton(props) {
           variant="contained"
           color="secondary"
           className={classes.button}
-          endIcon={<HighlightOffIcon />}
+          startIcon={<HighlightOffIcon />}
           onClick={removeFav}
         >
           Remove Favourite

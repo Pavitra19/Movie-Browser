@@ -31,7 +31,7 @@ const StyledTableRow = withStyles(() => ({
 // });
 
 export default function MovieTable(props) {
-  const { movieDetails, imdbID } = props;
+  const { movieDetails } = props;
   // const classes = useStyles();
 
   function createData(Genre, Plot, Runtime, Actors, Awards, imdbRating) {

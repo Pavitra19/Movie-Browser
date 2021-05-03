@@ -82,6 +82,12 @@ ul.react-multi-carousel-track {
   left: 50%;
 }
 
+.MuiButton-contained.share-btn {
+  display: flex;
+  position: absolute;
+  right: 32px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

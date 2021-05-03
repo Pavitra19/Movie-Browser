@@ -4,6 +4,7 @@ import "react-multi-carousel/lib/styles.css";
 import IconButton from "@material-ui/core/IconButton";
 import MovieIcon from "@material-ui/icons/Movie";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
+import ShareButton from "./ShareButton";
 
 export default function Favourites(props) {
   const { deviceType, favs, removeFav } = props;
@@ -43,6 +44,7 @@ export default function Favourites(props) {
   return (
     <div>
       <h1> Your favourites all in one place.</h1>
+      <ShareButton />
 
       <Carousel
         swipeable={false}
@@ -71,7 +73,7 @@ export default function Favourites(props) {
                 style={{
                   color: "crimson",
                   position: "absolute",
-                  right: "110px",
+                  right: "112px",
                   top: "-21px",
                   zIndex: 1,
                 }}
