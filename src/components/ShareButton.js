@@ -7,14 +7,15 @@ export default function ShareButton(props) {
 
   const handleClick = () => {
     setCopied(true);
+    navigator.clipboard.writeText(window.location.href);
 
-    setTimeout(() => setCopied(false), 1500);
+    setTimeout(() => setCopied(false), 1000);
   };
 
   return (
     <Button
       variant="contained"
-      color="secondary"
+      color={!copied ? "secondary" : "primary"}
       className="share-btn"
       startIcon={!copied && <ShareIcon />}
       onClick={() => {
