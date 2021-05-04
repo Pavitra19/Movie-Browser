@@ -90,7 +90,12 @@ export default function App() {
           </Tabs>
         </AppBar>
         <TabPanel value={value} index={0}>
-          <Favourites deviceType="desktop" favs={favs} removeFav={removeFav} />
+          <Favourites
+            deviceType="desktop"
+            favs={favs}
+            handleAddFav={handleAddFav}
+            removeFav={removeFav}
+          />
         </TabPanel>
         <TabPanel value={value} index={1}>
           <SearchBar

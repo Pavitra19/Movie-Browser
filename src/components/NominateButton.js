@@ -53,7 +53,7 @@ export default function NominateButton(props) {
     detailsURL += `${imdbID}`;
     fetch(detailsURL).then(async (details) => {
       details = await details.json();
-      // console.log("details: ", details);
+      console.log("details: ", details);
       setMovieDetails((prevValues) => ({
         ...prevValues,
         Genre: details.Genre,

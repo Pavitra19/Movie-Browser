@@ -3,12 +3,20 @@ import Button from "@material-ui/core/Button";
 import ShareIcon from "@material-ui/icons/Share";
 
 export default function ShareButton(props) {
+  const { favs } = props;
   const [copied, setCopied] = useState(false);
 
-  const handleClick = () => {
-    setCopied(true);
-    navigator.clipboard.writeText(window.location.href);
+  const getLink = () => {
+    const imdbIDs = favs.map((movie) => movie.imdbID);
+    const baseURL =
+      window.location.protocol +
+      "//" +
+      window.location.host +
+      window.location.pathname;
+    const params = `?favourites=${imdbIDs.join(",")}`;
+    navigator.clipboard.writeText(`${baseURL}${params}`);
 
+    setCopied(true);
     setTimeout(() => setCopied(false), 1000);
   };
 
@@ -19,8 +27,7 @@ export default function ShareButton(props) {
       className="share-btn"
       startIcon={!copied && <ShareIcon />}
       onClick={() => {
-        handleClick();
-        console.log("window: ", window.location.href);
+        getLink();
       }}
     >
       {!copied ? "Share Link" : "Copied!"}

@@ -1,15 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import IconButton from "@material-ui/core/IconButton";
 import MovieIcon from "@material-ui/icons/Movie";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 import ShareButton from "./ShareButton";
+// import { getQueryIDs, setNewURL } from "./constants/url";
 
 export default function Favourites(props) {
   const { deviceType, favs, removeFav } = props;
   const numFavs = favs.length;
   let placeholderCards = [];
+
+  useEffect(() => {
+    console.log("location favs page", window.location.href);
+    const queryString = window.location.search;
+    console.log("queryString: ", queryString);
+    if (queryString.includes("?favourites=")) {
+      const ids = queryString.split("?favourites=")[1];
+      console.log("ids: ", ids);
+      const idsArray = ids.split(",");
+      console.log("idsArray: ", idsArray);
+      idsArray.forEach((id) => getDetails(id));
+    }
+  }, []);
+
+  const getDetails = (id) => {
+    let detailsURL = `https://www.omdbapi.com/?apikey=d66f3ecf&i=${id}`;
+    fetch(detailsURL).then(async (details) => {
+      details = await details.json();
+      if (!favs.some((movie) => movie.imdbID === id)) {
+        props.handleAddFav({
+          Title: details.Title,
+          img: details.Poster,
+          alt: details.Title,
+          imdbID: details.imdbID,
+        });
+      }
+    });
+  };
 
   const responsive = {
     desktop: {
@@ -44,7 +73,7 @@ export default function Favourites(props) {
   return (
     <div>
       <h1> Your favourites all in one place.</h1>
-      <ShareButton />
+      <ShareButton favs={favs} />
 
       <Carousel
         swipeable={false}
