@@ -5,7 +5,7 @@ import NominateButton from "./NominateButton";
 export default function MovieDetails(props) {
   const { removeFav } = props;
   return (
-    <div>
+    <div style={{ marginTop: "-27px" }}>
       <MoviePreview Title={props.Title} img={props.img} alt={props.Title} />
       <h4>{props.year}</h4>
       <NominateButton

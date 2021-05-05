@@ -82,6 +82,11 @@ ul.react-multi-carousel-track {
   left: 50%;
 }
 
+.results-heading {
+  display: flex;
+  margin-left: 30px;
+}
+
 .MuiButton-contained.share-btn {
   display: flex;
   position: absolute;

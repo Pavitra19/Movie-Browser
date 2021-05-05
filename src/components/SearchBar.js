@@ -1,108 +1,108 @@
 import React, { useEffect, useState } from "react";
-import InputAdornment from "@material-ui/core/InputAdornment";
 import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Input from "@material-ui/core/Input";
-import SearchIcon from "@material-ui/icons/Search";
-import TabPanel from "./Tabs";
-import Error from "./Error";
-import Loading from "./Loading";
+import InputBase from "@material-ui/core/InputBase";
+import { fade } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    width: "100%",
+    // backgroundColor: theme.palette.background.paper,
+  },
+  title: {
+    flexGrow: 1,
+    display: "none",
+    [theme.breakpoints.up("sm")]: {
+      display: "block",
+    },
+  },
+  search: {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
+    },
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(1),
+      width: "auto",
+    },
+  },
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  inputRoot: {
+    color: "inherit",
+    // color: "red",
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    color: "black",
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch",
+      },
+    },
+  },
+}));
 
 export default function SearchBar(props) {
-  const { handleAddFav, removeFav } = props;
+  const { handleSearch } = props;
   const [searchTerm, setSearchTerm] = useState("");
-  const [movieName, setMovieName] = useState();
-  const [searchResults, setSearchResults] = useState();
-  const [error, setError] = useState();
-  const [loading, setLoading] = useState(false);
+  const classes = useStyles();
+
   let movieList = [];
 
   let URL = "https://www.omdbapi.com/?r=json&apikey=d66f3ecf&s=";
 
-  useEffect(() => console.log("searchResults: ", searchResults), [
-    searchResults,
-  ]);
+  // useEffect(() => console.log("searchResults: ", searchResults), [
+  //   searchResults,
+  // ]);
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  const showResults = (result) => {
-    setMovieName(searchTerm);
-    setLoading(true);
-    // console.log("Rsults in fn: ", result);
+  const showResults = () => {
     URL += `${searchTerm}`;
-    // console.log("URL is: ", URL);
-
-    fetch(URL)
-      .then(async (data) => {
-        data = await data.json();
-        console.log("data: ", data);
-        const { Response } = data;
-        if (Response === "True") {
-          const { Search } = data;
-          Search.forEach((movie) => {
-            movieList.push({
-              title: movie.Title,
-              url: movie.Poster,
-              year: movie.Year,
-              imdbID: movie.imdbID,
-            });
-          });
-          // console.log("movielist: ", movieList);
-          setSearchResults(movieList);
-          setError(null);
-          // setShowButton(true);
-        } else {
-          const { Error } = data;
-          setError(Error);
-          setSearchResults([]);
-        }
-      })
-      .then((response) => console.log("response", response));
-    setLoading(false);
+    handleSearch(searchTerm, URL, movieList);
+    // setSearchTerm("");
   };
 
   return (
     <>
       <FormControl style={{ color: "white" }}>
-        <InputLabel
-          style={{ color: "white" }}
-          htmlFor="input-with-icon-adornment"
-        >
-          Search
-        </InputLabel>
-        <Input
-          style={{ color: "white" }}
-          id="input-with-icon-adornment"
+        <InputBase
+          placeholder="Search…"
           onChange={handleChange}
           value={searchTerm}
+          classes={{
+            root: classes.inputRoot,
+            input: classes.inputInput,
+          }}
+          inputProps={{ "aria-label": "search" }}
           onKeyDown={(e) => {
             // console.log(e.key);
             if (e.key === "Enter" && searchTerm.trim().length > 0) {
-              showResults(searchResults);
+              showResults();
             }
           }}
-          startAdornment={
-            <InputAdornment position="start">
-              <SearchIcon style={{ color: "white" }} />
-            </InputAdornment>
-          }
         />
       </FormControl>
-      {loading && <Loading />}
-      {searchResults && searchResults.length > 0 && (
-        <>
-          <h1>Results for {movieName}</h1>
-          <TabPanel
-            favs={props.favs}
-            handleAddFav={handleAddFav}
-            removeFav={removeFav}
-            searchResults={searchResults}
-          />
-        </>
-      )}
-      {error && <Error errorMessage={error} />}
     </>
   );
 }
