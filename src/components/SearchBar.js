@@ -3,6 +3,8 @@ import FormControl from "@material-ui/core/FormControl";
 import InputBase from "@material-ui/core/InputBase";
 import { fade } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
+import IconButton from "@material-ui/core/IconButton";
+import ClearIcon from "@material-ui/icons/Clear";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -77,6 +79,10 @@ export default function SearchBar(props) {
     setSearchTerm(event.target.value);
   };
 
+  const handleClear = () => {
+    setSearchTerm("");
+  };
+
   const showResults = () => {
     URL += `${searchTerm}`;
     handleSearch(searchTerm, URL, movieList);
@@ -101,6 +107,13 @@ export default function SearchBar(props) {
               showResults();
             }
           }}
+          endAdornment={
+            searchTerm && (
+              <IconButton aria-label="Clear search" onClick={handleClear}>
+                <ClearIcon color="secondary" />
+              </IconButton>
+            )
+          }
         />
       </FormControl>
     </>
