@@ -79,10 +79,10 @@ export default function NominateButton(props) {
     <div>
       <MovieTable movieDetails={movieDetails} imdbID={imdbID} />
       <div className={classes.root}>
-        {favs.length === 2 && (
+        {favs.length === 6 && (
           <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
             <Alert onClose={handleClose} variant="filled" severity="warning">
-              You've reached your max of 5 favourites!
+              You've reached your max of 6 favourites!
             </Alert>
           </Snackbar>
         )}

@@ -64,7 +64,7 @@ export default function Favourites(props) {
       placeholderCards.push(
         <div key={i}>
           <MovieIcon className="placeholder-icon" />
-          <h4> Pick a favourite for it to show up here</h4>
+          <h4> Pick a favourite to display</h4>
         </div>
       );
     }
