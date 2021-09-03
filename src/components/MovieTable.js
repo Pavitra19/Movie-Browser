@@ -4,7 +4,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableRow from "@material-ui/core/TableRow";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 
 const StyledTableCell = withStyles(() => ({
   body: {
@@ -17,22 +17,13 @@ const StyledTableCell = withStyles(() => ({
 const StyledTableRow = withStyles(() => ({
   root: {
     "&:nth-of-type(odd)": {
-      // backgroundColor: "#393e46",
-      // backgroundColor: "#222831",
       backgroundColor: "#191919",
     },
   },
 }))(TableRow);
 
-// const useStyles = makeStyles({
-//   table: {
-//     minWidth: "888px",
-//   },
-// });
-
 export default function MovieTable(props) {
   const { movieDetails } = props;
-  // const classes = useStyles();
 
   function createData(Genre, Plot, Runtime, Actors, Awards, imdbRating) {
     return { Genre, Plot, Runtime, Actors, Awards, imdbRating };
