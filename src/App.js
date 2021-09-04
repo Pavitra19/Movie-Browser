@@ -112,9 +112,10 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const classes = useStyles();
 
-  useEffect(() => console.log("searchResults: ", searchResults), [
-    searchResults,
-  ]);
+  useEffect(
+    () => console.log("searchResults: ", searchResults),
+    [searchResults]
+  );
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -196,12 +197,6 @@ export default function App() {
                 <SearchIcon />
               </div>
               <SearchBar handleSearch={handleSearch} />
-              {/* <SearchBar
-                handleSearch={handleSearch}
-                handleAddFav={handleAddFav}
-                removeFav={removeFav}
-                favs={favs}
-              /> */}
             </div>
           </Toolbar>
         </AppBar>
@@ -261,7 +256,6 @@ export default function App() {
           />
         </TabPanel> */}
       </div>
-      {/* <NavBar handleAddFav={handleAddFav} favs={favs} /> */}
     </div>
   );
 }

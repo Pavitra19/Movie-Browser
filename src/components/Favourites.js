@@ -72,7 +72,15 @@ export default function Favourites(props) {
 
   return (
     <div>
-      <h1> Your favourites all in one place.</h1>
+      <h1
+        style={{
+          marginTop: "30px",
+          fontSize: "30px",
+          fontFamily: ("Noto Sans JP", "sans-serif"),
+        }}
+      >
+        Your favourites all in one place.
+      </h1>
       <ShareButton favs={favs} />
 
       <Carousel
