@@ -104,7 +104,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function App() {
-  const [favs, setFavs] = useState([]);
+  const [favs, setFavs] = useState(
+    JSON.parse(localStorage.getItem("favs")) || []
+  );
   const [value, setValue] = useState(0);
   const [movieName, setMovieName] = useState();
   const [searchResults, setSearchResults] = useState();
@@ -116,6 +118,8 @@ export default function App() {
     () => console.log("searchResults: ", searchResults),
     [searchResults]
   );
+
+  useEffect(() => localStorage.setItem("favs", JSON.stringify(favs)), [favs]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -157,8 +161,6 @@ export default function App() {
 
     setValue(1);
   };
-
-  useEffect(() => console.log("Favs: ", favs), [favs]);
 
   const handleAddFav = (movieDetails) => {
     console.log("handle fav", movieDetails);
