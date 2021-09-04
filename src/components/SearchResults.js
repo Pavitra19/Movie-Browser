@@ -2,16 +2,11 @@ import React, { useEffect, useState } from "react";
 import TabPanel from "./Tabs";
 import Error from "./Error";
 import Loading from "./Loading";
+import "./SearchResults.css";
 
 export default function SearchResults(props) {
-  const {
-    movieName,
-    handleAddFav,
-    removeFav,
-    searchResults,
-    error,
-    loading,
-  } = props;
+  const { movieName, handleAddFav, removeFav, searchResults, error, loading } =
+    props;
   //   const [searchTerm, setSearchTerm] = useState("");
   //   const [movieName, setMovieName] = useState();
   //   const [searchResults, setSearchResults] = useState();
@@ -79,14 +74,16 @@ export default function SearchResults(props) {
       )}
       {!searchResults && (
         <>
-          <h1>Search</h1>
-          <h2>Please enter a movie in the search bar.</h2>
+          <h1 className="Search">Search</h1>
+          <h2 className="Search-info">
+            Please enter a movie in the search bar.
+          </h2>
         </>
       )}
       {error && (
         <>
           <h1 className="results-heading">Results for "{movieName}"</h1>
-          <Error errorMessage={error} />{" "}
+          <Error errorMessage={error} />
         </>
       )}
     </>
