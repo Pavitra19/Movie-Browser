@@ -107,19 +107,28 @@ export default function App() {
   const [favs, setFavs] = useState(
     JSON.parse(localStorage.getItem("favs")) || []
   );
-  const [value, setValue] = useState(0);
-  const [movieName, setMovieName] = useState();
-  const [searchResults, setSearchResults] = useState();
+  // const [value, setValue] = useState(0);
+  const [value, setValue] = useState(
+    JSON.parse(localStorage.getItem("value")) || 0
+  );
+  // const [movieName, setMovieName] = useState();
+  const [movieName, setMovieName] = useState(
+    localStorage.getItem("movieName") || ""
+  );
+  // const [searchResults, setSearchResults] = useState();
+  const [searchResults, setSearchResults] = useState(
+    JSON.parse(localStorage.getItem("searchResults")) || []
+  );
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
   const classes = useStyles();
 
-  useEffect(
-    () => console.log("searchResults: ", searchResults),
-    [searchResults]
-  );
-
-  useEffect(() => localStorage.setItem("favs", JSON.stringify(favs)), [favs]);
+  useEffect(() => {
+    localStorage.setItem("favs", JSON.stringify(favs));
+    localStorage.setItem("value", JSON.stringify(value));
+    localStorage.setItem("searchResults", JSON.stringify(searchResults));
+    localStorage.setItem("movieName", movieName);
+  }, [favs, value, searchResults, movieName]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -147,7 +156,6 @@ export default function App() {
               imdbID: movie.imdbID,
             });
           });
-          // console.log("movielist: ", movieList);
           setSearchResults(movieList);
           setError(null);
         } else {
@@ -221,42 +229,6 @@ export default function App() {
             removeFav={removeFav}
           />
         </TabPanel>
-        {/* <AppBar position="static" color="default">
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-            variant="scrollable"
-            scrollButtons="auto"
-            aria-label="scrollable auto tabs example"
-          >
-            <Tab icon={<HomeIcon />} label="Home" {...a11yProps(0)} />
-            <Tab icon={<SearchIcon />} label="Search" {...a11yProps(1)} />
-            <SearchBar
-              handleAddFav={handleAddFav}
-              removeFav={removeFav}
-              favs={favs}
-              setValue={setValue}
-            />
-          </Tabs>
-        </AppBar>
-        {/* <TabPanel value={value} index={0}> 
-        <TabPanel value={value} index={0}>
-          <Favourites
-            deviceType="desktop"
-            favs={favs}
-            handleAddFav={handleAddFav}
-            removeFav={removeFav}
-          />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <SearchBar
-            handleAddFav={handleAddFav}
-            removeFav={removeFav}
-            favs={favs}
-          />
-        </TabPanel> */}
       </div>
     </div>
   );
