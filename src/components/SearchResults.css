@@ -1,0 +1,15 @@
+.Search,
+.Search-info,
+.results-heading {
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+.Search {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.results-heading {
+  margin-top: 25px;
+}

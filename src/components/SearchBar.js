@@ -102,7 +102,6 @@ export default function SearchBar(props) {
           }}
           inputProps={{ "aria-label": "search" }}
           onKeyDown={(e) => {
-            // console.log(e.key);
             if (e.key === "Enter" && searchTerm.trim().length > 0) {
               showResults();
             }
@@ -110,7 +109,7 @@ export default function SearchBar(props) {
           endAdornment={
             searchTerm && (
               <IconButton aria-label="Clear search" onClick={handleClear}>
-                <ClearIcon color="secondary" />
+                <ClearIcon />
               </IconButton>
             )
           }
