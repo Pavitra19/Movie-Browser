@@ -64,16 +64,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SearchBar(props) {
   const { handleSearch } = props;
-  const [searchTerm, setSearchTerm] = useState("");
+  // const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState(
+    localStorage.getItem("searchTerm") || ""
+  );
   const classes = useStyles();
 
   let movieList = [];
 
   let URL = "https://www.omdbapi.com/?r=json&apikey=d66f3ecf&s=";
 
-  // useEffect(() => console.log("searchResults: ", searchResults), [
-  //   searchResults,
-  // ]);
+  useEffect(() => localStorage.setItem("searchTerm", searchTerm), [searchTerm]);
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
