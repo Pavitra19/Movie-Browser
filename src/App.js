@@ -105,30 +105,34 @@ const useStyles = makeStyles((theme) => ({
 
 export default function App() {
   const [favs, setFavs] = useState(
-    JSON.parse(localStorage.getItem("favs")) || []
+    JSON.parse(sessionStorage.getItem("favs")) || []
   );
   // const [value, setValue] = useState(0);
   const [value, setValue] = useState(
-    JSON.parse(localStorage.getItem("value")) || 0
+    JSON.parse(sessionStorage.getItem("value")) || 0
   );
   // const [movieName, setMovieName] = useState();
   const [movieName, setMovieName] = useState(
-    localStorage.getItem("movieName") || ""
+    sessionStorage.getItem("movieName") || ""
   );
   // const [searchResults, setSearchResults] = useState();
   const [searchResults, setSearchResults] = useState(
-    JSON.parse(localStorage.getItem("searchResults")) || []
+    JSON.parse(sessionStorage.getItem("searchResults")) || []
   );
-  const [error, setError] = useState();
+  // const [error, setError] = useState();
+  const [error, setError] = useState(
+    JSON.parse(sessionStorage.getItem("error")) || null
+  );
   const [loading, setLoading] = useState(false);
   const classes = useStyles();
 
   useEffect(() => {
-    localStorage.setItem("favs", JSON.stringify(favs));
-    localStorage.setItem("value", JSON.stringify(value));
-    localStorage.setItem("searchResults", JSON.stringify(searchResults));
-    localStorage.setItem("movieName", movieName);
-  }, [favs, value, searchResults, movieName]);
+    sessionStorage.setItem("favs", JSON.stringify(favs));
+    sessionStorage.setItem("value", value);
+    sessionStorage.setItem("searchResults", JSON.stringify(searchResults));
+    sessionStorage.setItem("movieName", movieName);
+    sessionStorage.setItem("error", JSON.stringify(error));
+  }, [favs, value, searchResults, movieName, error]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

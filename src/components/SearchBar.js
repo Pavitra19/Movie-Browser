@@ -66,7 +66,7 @@ export default function SearchBar(props) {
   const { handleSearch } = props;
   // const [searchTerm, setSearchTerm] = useState("");
   const [searchTerm, setSearchTerm] = useState(
-    localStorage.getItem("searchTerm") || ""
+    sessionStorage.getItem("searchTerm") || ""
   );
   const classes = useStyles();
 
@@ -74,7 +74,10 @@ export default function SearchBar(props) {
 
   let URL = "https://www.omdbapi.com/?r=json&apikey=d66f3ecf&s=";
 
-  useEffect(() => localStorage.setItem("searchTerm", searchTerm), [searchTerm]);
+  useEffect(
+    () => sessionStorage.setItem("searchTerm", searchTerm),
+    [searchTerm]
+  );
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
