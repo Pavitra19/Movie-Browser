@@ -1,4 +1,4 @@
-[Demo]
+[Demo](https://pavitra19.github.io/Movie-Browser/)
 
 # Getting Started with Create React App
 
