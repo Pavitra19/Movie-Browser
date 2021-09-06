@@ -2,7 +2,7 @@ import React from "react";
 import TabPanel from "./Tabs";
 import Error from "./Error";
 import Loading from "./Loading";
-import "./SearchResults.css";
+import "./styles/SearchResults.css";
 
 export default function SearchResults(props) {
   const { movieName, handleAddFav, removeFav, searchResults, error, loading } =
