@@ -5,7 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MovieIcon from "@material-ui/icons/Movie";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 import ShareButton from "./ShareButton";
-// import { getQueryIDs, setNewURL } from "./constants/url";
+import "./styles/Favourites.css";
 
 export default function Favourites(props) {
   const { deviceType, favs, removeFav } = props;
@@ -13,14 +13,10 @@ export default function Favourites(props) {
   let placeholderCards = [];
 
   useEffect(() => {
-    console.log("location favs page", window.location.href);
     const queryString = window.location.search;
-    console.log("queryString: ", queryString);
     if (queryString.includes("?favourites=")) {
       const ids = queryString.split("?favourites=")[1];
-      console.log("ids: ", ids);
       const idsArray = ids.split(",");
-      console.log("idsArray: ", idsArray);
       idsArray.forEach((id) => getDetails(id));
     }
   }, []);
@@ -106,11 +102,11 @@ export default function Favourites(props) {
           return (
             <div key={movie.imdbID}>
               <IconButton
+                className="remove-button"
                 title="Remove"
                 style={{
                   color: "crimson",
                   position: "absolute",
-                  right: "112px",
                   top: "-21px",
                   zIndex: 1,
                 }}
@@ -129,24 +125,6 @@ export default function Favourites(props) {
           );
         })}
         {placeholderCards}
-        {/* <div>
-          <img
-            src="https://upload.wikimedia.org/wikipedia/en/1/15/Yeh_jawani_hai_deewani.jpg"
-            alt="movie1"
-          />
-        </div>
-        <div>
-          <img
-            src="https://img.studioflicks.com/wp-content/uploads/2018/02/Padmaavat-movie-posters.jpg"
-            alt="movie2"
-          />
-        </div>
-        <div>
-          <img
-            src="https://m.media-amazon.com/images/M/MV5BZjAzZjZiMmQtMDZmOC00NjVmLTkyNTItOGI2Mzg4NTBhZTA1XkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_.jpg"
-            alt="movie3"
-          />
-        </div>*/}
       </Carousel>
     </div>
   );

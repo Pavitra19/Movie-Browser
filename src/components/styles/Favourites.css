@@ -1,0 +1,11 @@
+@media (min-width: 1470px) {
+  .MuiButtonBase-root.MuiIconButton-root.remove-button {
+    right: 31%;
+  }
+}
+
+@media (max-width: 1450px) {
+  .MuiButtonBase-root.MuiIconButton-root.remove-button {
+    right: 114px;
+  }
+}
