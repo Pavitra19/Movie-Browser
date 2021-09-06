@@ -19,7 +19,7 @@ export default function Favourites(props) {
       const idsArray = ids.split(",");
       idsArray.forEach((id) => getDetails(id));
     }
-  }, []);
+  });
 
   const getDetails = (id) => {
     let detailsURL = `https://www.omdbapi.com/?apikey=d66f3ecf&i=${id}`;
