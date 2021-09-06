@@ -7,6 +7,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import MovieTable from "./MovieTable";
 import Loading from "./Loading";
+import "./styles/NominateButton.css";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -53,7 +54,6 @@ export default function NominateButton(props) {
     detailsURL += `${imdbID}`;
     fetch(detailsURL).then(async (details) => {
       details = await details.json();
-      console.log("details: ", details);
       setMovieDetails((prevValues) => ({
         ...prevValues,
         Genre: details.Genre,

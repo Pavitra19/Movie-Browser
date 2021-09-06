@@ -148,7 +148,6 @@ export default function App() {
     })
       .then(async (data) => {
         data = await data.json();
-        console.log("data: ", data);
         const { Response } = data;
         if (Response === "True") {
           const { Search } = data;
@@ -175,18 +174,15 @@ export default function App() {
   };
 
   const handleAddFav = (movieDetails) => {
-    console.log("handle fav", movieDetails);
     setFavs((prevProps) => {
       return [...prevProps, movieDetails];
     });
   };
 
   const removeFav = (movieDetails) => {
-    console.log("remove fav ", movieDetails);
     setFavs(favs.filter(({ Title }) => Title !== movieDetails.Title));
   };
 
-  console.log("value: ", value);
   return (
     <div className="App">
       <div className={classes.root}>

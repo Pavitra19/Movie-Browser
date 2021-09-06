@@ -40,7 +40,7 @@ export default function MovieTable(props) {
 
   return (
     <TableContainer>
-      <Table aria-label="simple table" style={{ minWidth: "862px" }}>
+      <Table aria-label="simple table" style={{ minWidth: "1100px" }}>
         <TableBody>
           {rows.map((row, index) => (
             <StyledTableRow key={`${row.name} ${index}`}>
