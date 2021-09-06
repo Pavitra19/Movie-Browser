@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     width: "100%",
-    // backgroundColor: theme.palette.background.paper,
   },
   title: {
     flexGrow: 1,
@@ -44,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
   },
   inputRoot: {
     color: "inherit",
-    // color: "red",
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
@@ -64,7 +62,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SearchBar(props) {
   const { handleSearch } = props;
-  // const [searchTerm, setSearchTerm] = useState("");
   const [searchTerm, setSearchTerm] = useState(
     sessionStorage.getItem("searchTerm") || ""
   );
@@ -90,7 +87,6 @@ export default function SearchBar(props) {
   const showResults = () => {
     URL += `${searchTerm}`;
     handleSearch(searchTerm, URL, movieList);
-    // setSearchTerm("");
   };
 
   return (

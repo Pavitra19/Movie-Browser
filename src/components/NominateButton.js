@@ -67,8 +67,6 @@ export default function NominateButton(props) {
     setLoading(false);
   };
 
-  // getDetails();
-
   const checkNominated = () => {
     return favs.some((movie) => movie.imdbID === imdbID);
   };
