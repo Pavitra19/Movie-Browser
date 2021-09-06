@@ -107,19 +107,15 @@ export default function App() {
   const [favs, setFavs] = useState(
     JSON.parse(sessionStorage.getItem("favs")) || []
   );
-  // const [value, setValue] = useState(0);
   const [value, setValue] = useState(
     JSON.parse(sessionStorage.getItem("value")) || 0
   );
-  // const [movieName, setMovieName] = useState();
   const [movieName, setMovieName] = useState(
-    sessionStorage.getItem("movieName") || ""
+    sessionStorage.getItem("movieName") || null
   );
-  // const [searchResults, setSearchResults] = useState();
   const [searchResults, setSearchResults] = useState(
-    JSON.parse(sessionStorage.getItem("searchResults")) || []
+    JSON.parse(sessionStorage.getItem("searchResults")) || null
   );
-  // const [error, setError] = useState();
   const [error, setError] = useState(
     JSON.parse(sessionStorage.getItem("error")) || null
   );
